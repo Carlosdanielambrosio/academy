@@ -1,0 +1,442 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.3.2 (Python 3.12.4 on win32)" generated="2025-12-08T20:33:59.235283" rpa="false" schemaversion="5">
+<suite id="s1" name="userExceptions" source="C:\Users\danie\OneDrive\Área de Trabalho\academy\blacklist_academy\robot_framework\tests\user\userExceptions.robot">
+<test id="s1-t1" name="Update password with invalid ID" line="9">
+<kw name="Update pass with invalid id" owner="userExceptions">
+<kw name="Pegar Token" owner="userExceptions">
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-12-08T20:34:00.830387" level="INFO">${body} = {'email': 'blacklist@qa.com', 'password': '1234@Test'}</msg>
+<var>${body}</var>
+<arg>email=blacklist@qa.com</arg>
+<arg>password=1234@Test</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-12-08T20:34:00.830387" elapsed="0.000000"/>
+</kw>
+<kw name="Criar Sessao" owner="userExceptions">
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-12-08T20:34:00.831369" level="INFO">${headers} = {'accept': 'application/json', 'Content-Type': 'application/json'}</msg>
+<var>${headers}</var>
+<arg>accept=application/json</arg>
+<arg>Content-Type=application/json</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-12-08T20:34:00.831369" elapsed="0.000000"/>
+</kw>
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2025-12-08T20:34:00.832371" level="INFO">Creating Session using : alias=develop, url=https://api-blacklist.qacoders.dev.br/api/, headers={'accept': 'application/json', 'Content-Type': 'application/json'},                     cookies={}, auth=None, timeout=None, proxies=None, verify=True,                     debug=0 </msg>
+<arg>alias=develop</arg>
+<arg>url=${baseUrl}</arg>
+<arg>headers=${headers}</arg>
+<arg>verify=true</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2025-12-08T20:34:00.831369" elapsed="0.001002"/>
+</kw>
+<status status="PASS" start="2025-12-08T20:34:00.831369" elapsed="0.001002"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-12-08T20:34:03.662785" level="INFO">POST Request : url=https://api-blacklist.qacoders.dev.br/api/login 
+ path_url=/api/login 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'accept': 'application/json', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Content-Length': '54'} 
+ body=b'{"email": "blacklist@qa.com", "password": "1234@Test"}' 
+ </msg>
+<msg time="2025-12-08T20:34:03.662785" level="INFO">POST Response : url=https://api-blacklist.qacoders.dev.br/api/login 
+ status=400, reason=Bad Request 
+ headers={'Access-Control-Allow-Origin': '*', 'Content-Length': '49', 'Content-Type': 'application/json; charset=utf-8', 'Date': 'Mon, 08 Dec 2025 20:34:03 GMT', 'Etag': 'W/"31-QT9Dfe6eFYJuHGiF63OD/wf024c"', 'X-Powered-By': 'Express'} 
+ body={"mailMessage":"O campo e-mail é obrigatório."} 
+ </msg>
+<msg time="2025-12-08T20:34:03.663791" level="INFO">${resposta} = &lt;Response [400]&gt;</msg>
+<var>${resposta}</var>
+<arg>alias=develop</arg>
+<arg>url=/login</arg>
+<arg>json=${body}</arg>
+<arg>expected_status=any</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-12-08T20:34:00.832371" elapsed="2.831420"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2025-12-08T20:34:03.664771" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<msg time="2025-12-08T20:34:03.664771" level="FAIL">400 != 200</msg>
+<arg>${resposta.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="FAIL" start="2025-12-08T20:34:03.663791" elapsed="0.000980">400 != 200</status>
+</kw>
+<return>
+<value>${resposta.json()["token"]}</value>
+<status status="NOT RUN" start="2025-12-08T20:34:03.664771" elapsed="0.000000"/>
+</return>
+<var>${token}</var>
+<status status="FAIL" start="2025-12-08T20:34:00.829362" elapsed="2.836410">400 != 200</status>
+</kw>
+<kw name="Create Session" owner="RequestsLibrary">
+<arg>api</arg>
+<arg>${baseUrl}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="NOT RUN" start="2025-12-08T20:34:03.665772" elapsed="0.000000"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<var>${body}</var>
+<arg>password=${newPassword}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="NOT RUN" start="2025-12-08T20:34:03.665772" elapsed="0.000000"/>
+</kw>
+<kw name="PUT On Session" owner="RequestsLibrary">
+<var>${res}</var>
+<arg>api</arg>
+<arg>/user/${invalid_id}/password</arg>
+<arg>params=token=${token}</arg>
+<arg>json=${body}</arg>
+<arg>expected_status=any</arg>
+<doc>Sends a PUT request on a previously created HTTP Session.</doc>
+<status status="NOT RUN" start="2025-12-08T20:34:03.665772" elapsed="0.000000"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<arg>${res.status_code}</arg>
+<arg>400</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="NOT RUN" start="2025-12-08T20:34:03.665772" elapsed="0.000000"/>
+</kw>
+<kw name="Should Contain" owner="BuiltIn">
+<arg>${res.text}</arg>
+<arg>User not found</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="NOT RUN" start="2025-12-08T20:34:03.666776" elapsed="0.000000"/>
+</kw>
+<status status="FAIL" start="2025-12-08T20:34:00.828393" elapsed="2.838383">400 != 200</status>
+</kw>
+<status status="FAIL" start="2025-12-08T20:34:00.827391" elapsed="2.840385">400 != 200</status>
+</test>
+<test id="s1-t2" name="Update password without token" line="13">
+<kw name="Update pass with invalid id" owner="userExceptions">
+<kw name="Pegar Token" owner="userExceptions">
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-12-08T20:34:03.672784" level="INFO">${body} = {'email': 'blacklist@qa.com', 'password': '1234@Test'}</msg>
+<var>${body}</var>
+<arg>email=blacklist@qa.com</arg>
+<arg>password=1234@Test</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-12-08T20:34:03.671785" elapsed="0.000999"/>
+</kw>
+<kw name="Criar Sessao" owner="userExceptions">
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-12-08T20:34:03.673778" level="INFO">${headers} = {'accept': 'application/json', 'Content-Type': 'application/json'}</msg>
+<var>${headers}</var>
+<arg>accept=application/json</arg>
+<arg>Content-Type=application/json</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-12-08T20:34:03.672784" elapsed="0.000994"/>
+</kw>
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2025-12-08T20:34:03.673778" level="INFO">Creating Session using : alias=develop, url=https://api-blacklist.qacoders.dev.br/api/, headers={'accept': 'application/json', 'Content-Type': 'application/json'},                     cookies={}, auth=None, timeout=None, proxies=None, verify=True,                     debug=0 </msg>
+<arg>alias=develop</arg>
+<arg>url=${baseUrl}</arg>
+<arg>headers=${headers}</arg>
+<arg>verify=true</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2025-12-08T20:34:03.673778" elapsed="0.000999"/>
+</kw>
+<status status="PASS" start="2025-12-08T20:34:03.672784" elapsed="0.001993"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-12-08T20:34:05.188391" level="INFO">POST Request : url=https://api-blacklist.qacoders.dev.br/api/login 
+ path_url=/api/login 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'accept': 'application/json', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Content-Length': '54'} 
+ body=b'{"email": "blacklist@qa.com", "password": "1234@Test"}' 
+ </msg>
+<msg time="2025-12-08T20:34:05.188391" level="INFO">POST Response : url=https://api-blacklist.qacoders.dev.br/api/login 
+ status=400, reason=Bad Request 
+ headers={'Access-Control-Allow-Origin': '*', 'Content-Length': '49', 'Content-Type': 'application/json; charset=utf-8', 'Date': 'Mon, 08 Dec 2025 20:34:05 GMT', 'Etag': 'W/"31-QT9Dfe6eFYJuHGiF63OD/wf024c"', 'X-Powered-By': 'Express'} 
+ body={"mailMessage":"O campo e-mail é obrigatório."} 
+ </msg>
+<msg time="2025-12-08T20:34:05.188391" level="INFO">${resposta} = &lt;Response [400]&gt;</msg>
+<var>${resposta}</var>
+<arg>alias=develop</arg>
+<arg>url=/login</arg>
+<arg>json=${body}</arg>
+<arg>expected_status=any</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-12-08T20:34:03.674777" elapsed="1.513614"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2025-12-08T20:34:05.189385" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<msg time="2025-12-08T20:34:05.190393" level="FAIL">400 != 200</msg>
+<arg>${resposta.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="FAIL" start="2025-12-08T20:34:05.188391" elapsed="0.002002">400 != 200</status>
+</kw>
+<return>
+<value>${resposta.json()["token"]}</value>
+<status status="NOT RUN" start="2025-12-08T20:34:05.190393" elapsed="0.000000"/>
+</return>
+<var>${token}</var>
+<status status="FAIL" start="2025-12-08T20:34:03.670775" elapsed="1.519618">400 != 200</status>
+</kw>
+<kw name="Create Session" owner="RequestsLibrary">
+<arg>api</arg>
+<arg>${baseUrl}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="NOT RUN" start="2025-12-08T20:34:05.191392" elapsed="0.000000"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<var>${body}</var>
+<arg>password=${newPassword}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="NOT RUN" start="2025-12-08T20:34:05.191392" elapsed="0.000000"/>
+</kw>
+<kw name="PUT On Session" owner="RequestsLibrary">
+<var>${res}</var>
+<arg>api</arg>
+<arg>/user/${invalid_id}/password</arg>
+<arg>params=token=${token}</arg>
+<arg>json=${body}</arg>
+<arg>expected_status=any</arg>
+<doc>Sends a PUT request on a previously created HTTP Session.</doc>
+<status status="NOT RUN" start="2025-12-08T20:34:05.191392" elapsed="0.000000"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<arg>${res.status_code}</arg>
+<arg>400</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="NOT RUN" start="2025-12-08T20:34:05.191392" elapsed="0.000000"/>
+</kw>
+<kw name="Should Contain" owner="BuiltIn">
+<arg>${res.text}</arg>
+<arg>User not found</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="NOT RUN" start="2025-12-08T20:34:05.192392" elapsed="0.000000"/>
+</kw>
+<status status="FAIL" start="2025-12-08T20:34:03.670775" elapsed="1.521617">400 != 200</status>
+</kw>
+<status status="FAIL" start="2025-12-08T20:34:03.669777" elapsed="1.522615">400 != 200</status>
+</test>
+<test id="s1-t3" name="Validate password with more than 12 characters" line="17">
+<kw name="Update pass more than 12" owner="userExceptions">
+<kw name="Validate Password Invalid" owner="userExceptions">
+<kw name="Log To Console" owner="BuiltIn">
+<arg>Testing invalid password: ${password}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2025-12-08T20:34:05.194400" elapsed="0.000992"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-12-08T20:34:05.196402" level="INFO">Expected: Password exceeds max length</msg>
+<arg>Expected: ${message}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-12-08T20:34:05.196402" elapsed="0.000000"/>
+</kw>
+<arg>${pass_more_than_12}</arg>
+<arg>Password exceeds max length</arg>
+<status status="PASS" start="2025-12-08T20:34:05.194400" elapsed="0.002002"/>
+</kw>
+<status status="PASS" start="2025-12-08T20:34:05.194400" elapsed="0.002002"/>
+</kw>
+<status status="PASS" start="2025-12-08T20:34:05.193400" elapsed="0.006002"/>
+</test>
+<test id="s1-t4" name="Validate password with less than 12 characters" line="20">
+<kw name="Update pass less than 12" owner="userExceptions">
+<kw name="Validate Password Invalid" owner="userExceptions">
+<kw name="Log To Console" owner="BuiltIn">
+<arg>Testing invalid password: ${password}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2025-12-08T20:34:05.211386" elapsed="0.001013"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-12-08T20:34:05.213407" level="INFO">Expected: Password too short</msg>
+<arg>Expected: ${message}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-12-08T20:34:05.213407" elapsed="0.000000"/>
+</kw>
+<arg>${pass_less_than_12}</arg>
+<arg>Password too short</arg>
+<status status="PASS" start="2025-12-08T20:34:05.211386" elapsed="0.002021"/>
+</kw>
+<status status="PASS" start="2025-12-08T20:34:05.210390" elapsed="0.003017"/>
+</kw>
+<status status="PASS" start="2025-12-08T20:34:05.209393" elapsed="0.004995"/>
+</test>
+<test id="s1-t5" name="Validate field confirmar senha with a different pass" line="23">
+<kw name="Validate field with a different pass" owner="userExceptions">
+<kw name="Validate Confirm Password Fail" owner="userExceptions">
+<kw name="Log To Console" owner="BuiltIn">
+<arg>Password mismatch: ${password} != ${confirm}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2025-12-08T20:34:05.216381" elapsed="0.001010"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-12-08T20:34:05.217391" level="INFO">Confirm password mismatch validation triggered</msg>
+<arg>Confirm password mismatch validation triggered</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-12-08T20:34:05.217391" elapsed="0.000000"/>
+</kw>
+<arg>${pass_original}</arg>
+<arg>${pass_confirm_wrong}</arg>
+<status status="PASS" start="2025-12-08T20:34:05.216381" elapsed="0.001010"/>
+</kw>
+<status status="PASS" start="2025-12-08T20:34:05.215395" elapsed="0.001996"/>
+</kw>
+<status status="PASS" start="2025-12-08T20:34:05.215395" elapsed="0.003026"/>
+</test>
+<test id="s1-t6" name="Validate mandatoty password field" line="26">
+<kw name="Validate field password as mandatory" owner="userExceptions">
+<kw name="Validate Password Invalid" owner="userExceptions">
+<kw name="Log To Console" owner="BuiltIn">
+<arg>Testing invalid password: ${password}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2025-12-08T20:34:05.219392" elapsed="0.001002"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-12-08T20:34:05.220394" level="INFO">Expected: Password is required</msg>
+<arg>Expected: ${message}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-12-08T20:34:05.220394" elapsed="0.000000"/>
+</kw>
+<arg>${pass_empty}</arg>
+<arg>Password is required</arg>
+<status status="PASS" start="2025-12-08T20:34:05.219392" elapsed="0.001002"/>
+</kw>
+<status status="PASS" start="2025-12-08T20:34:05.219392" elapsed="0.001002"/>
+</kw>
+<status status="PASS" start="2025-12-08T20:34:05.218421" elapsed="0.002972"/>
+</test>
+<test id="s1-t7" name="Validate field without lowercase" line="29">
+<kw name="Validate pass no lowercase" owner="userExceptions">
+<kw name="Validate Password Invalid" owner="userExceptions">
+<kw name="Log To Console" owner="BuiltIn">
+<arg>Testing invalid password: ${password}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2025-12-08T20:34:05.223410" elapsed="0.000000"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-12-08T20:34:05.224391" level="INFO">Expected: Must contain lowercase letter</msg>
+<arg>Expected: ${message}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-12-08T20:34:05.224391" elapsed="0.000000"/>
+</kw>
+<arg>${pass_no_lowercase}</arg>
+<arg>Must contain lowercase letter</arg>
+<status status="PASS" start="2025-12-08T20:34:05.223410" elapsed="0.001983"/>
+</kw>
+<status status="PASS" start="2025-12-08T20:34:05.222391" elapsed="0.003002"/>
+</kw>
+<status status="PASS" start="2025-12-08T20:34:05.222391" elapsed="0.003002"/>
+</test>
+<test id="s1-t8" name="Validate field without uppercase" line="33">
+<kw name="Validate pass no uppercase" owner="userExceptions">
+<kw name="Validate Password Invalid" owner="userExceptions">
+<kw name="Log To Console" owner="BuiltIn">
+<arg>Testing invalid password: ${password}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2025-12-08T20:34:05.227389" elapsed="0.001018"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-12-08T20:34:05.228407" level="INFO">Expected: Must contain uppercase letter</msg>
+<arg>Expected: ${message}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-12-08T20:34:05.228407" elapsed="0.000000"/>
+</kw>
+<arg>${pass_no_uppercase}</arg>
+<arg>Must contain uppercase letter</arg>
+<status status="PASS" start="2025-12-08T20:34:05.227389" elapsed="0.001996"/>
+</kw>
+<status status="PASS" start="2025-12-08T20:34:05.227389" elapsed="0.001996"/>
+</kw>
+<status status="PASS" start="2025-12-08T20:34:05.226412" elapsed="0.002973"/>
+</test>
+<test id="s1-t9" name="Validate field without numbers" line="36">
+<kw name="Validate pass no numbers" owner="userExceptions">
+<kw name="Validate Password Invalid" owner="userExceptions">
+<kw name="Log To Console" owner="BuiltIn">
+<arg>Testing invalid password: ${password}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2025-12-08T20:34:05.230387" elapsed="0.001002"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-12-08T20:34:05.231389" level="INFO">Expected: Must contain a number</msg>
+<arg>Expected: ${message}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-12-08T20:34:05.231389" elapsed="0.000000"/>
+</kw>
+<arg>${pass_no_numbers}</arg>
+<arg>Must contain a number</arg>
+<status status="PASS" start="2025-12-08T20:34:05.230387" elapsed="0.001002"/>
+</kw>
+<status status="PASS" start="2025-12-08T20:34:05.230387" elapsed="0.001002"/>
+</kw>
+<status status="PASS" start="2025-12-08T20:34:05.229385" elapsed="0.003015"/>
+</test>
+<test id="s1-t10" name="Validate field without special characters" line="39">
+<kw name="Validate pass no special characters" owner="userExceptions">
+<kw name="Validate Password Invalid" owner="userExceptions">
+<kw name="Log To Console" owner="BuiltIn">
+<arg>Testing invalid password: ${password}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2025-12-08T20:34:05.233394" elapsed="0.000992"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-12-08T20:34:05.234386" level="INFO">Expected: Must contain special character</msg>
+<arg>Expected: ${message}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-12-08T20:34:05.234386" elapsed="0.000000"/>
+</kw>
+<arg>${pass_no_special}</arg>
+<arg>Must contain special character</arg>
+<status status="PASS" start="2025-12-08T20:34:05.233394" elapsed="0.002006"/>
+</kw>
+<status status="PASS" start="2025-12-08T20:34:05.233394" elapsed="0.002006"/>
+</kw>
+<status status="PASS" start="2025-12-08T20:34:05.232400" elapsed="0.003000"/>
+</test>
+<test id="s1-t11" name="Validate login with previous password" line="42">
+<kw name="Login with previous pass" owner="userExceptions">
+<kw name="Attempt Login With Old Password" owner="userExceptions">
+<kw name="Log To Console" owner="BuiltIn">
+<arg>Attempting login with old password: ${password}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2025-12-08T20:34:05.237387" elapsed="0.000000"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-12-08T20:34:05.237387" level="INFO">${login_error} = Invalid password</msg>
+<var>${login_error}</var>
+<arg>Invalid password</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-12-08T20:34:05.237387" elapsed="0.000000"/>
+</kw>
+<kw name="Set Suite Variable" owner="BuiltIn">
+<msg time="2025-12-08T20:34:05.238399" level="INFO">${login_error} = Invalid password</msg>
+<arg>${login_error}</arg>
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<status status="PASS" start="2025-12-08T20:34:05.238399" elapsed="0.000000"/>
+</kw>
+<arg>${previous_password}</arg>
+<status status="PASS" start="2025-12-08T20:34:05.236394" elapsed="0.002005"/>
+</kw>
+<kw name="Should Contain" owner="BuiltIn">
+<arg>${login_error}</arg>
+<arg>Invalid password</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="PASS" start="2025-12-08T20:34:05.238399" elapsed="0.000000"/>
+</kw>
+<status status="PASS" start="2025-12-08T20:34:05.236394" elapsed="0.002005"/>
+</kw>
+<status status="PASS" start="2025-12-08T20:34:05.236394" elapsed="0.002998"/>
+</test>
+<doc>cenarios de excessao</doc>
+<status status="FAIL" start="2025-12-08T20:33:59.237294" elapsed="6.003097"/>
+</suite>
+<statistics>
+<total>
+<stat pass="9" fail="2" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat name="userExceptions" id="s1" pass="9" fail="2" skip="0">userExceptions</stat>
+</suite>
+</statistics>
+<errors>
+<msg time="2025-12-08T20:34:00.820368" level="ERROR">Error in file 'C:\Users\danie\OneDrive\Área de Trabalho\academy\blacklist_academy\robot_framework\resources\userExceptions.resource' on line 6: Resource file 'generate_random_data.resource' does not exist.</msg>
+</errors>
+</robot>

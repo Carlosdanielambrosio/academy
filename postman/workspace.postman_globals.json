@@ -1,0 +1,255 @@
+{
+	"id": "2dac7735-8460-405b-86fa-f7371bb783ad",
+	"values": [
+		{
+			"key": "tokenAdmin",
+			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2OGZjMTBkY2ViMTE0OWQzMDhkNzMyMDkiLCJ1c2VySWQiOiI2OGZjMTBkY2ViMTE0OWQzMDhkNzMyMDkiLCJuYW1lIjoiQ2FtZWxvIGRvIFRlc3RlIiwibWFpbCI6ImNhbWVsb0B0ZXN0LmNvbS5iciIsImFjY2Vzc1Byb2ZpbGUiOiJBRE1JTiIsImlhdCI6MTc2MTM1MDExNSwiZXhwIjoxNzYxNDM2NTE1fQ.23PUS-kSpM-d4utyDqtxz83LcEZIqblm30qqTfGQ83Y",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "responseMessage",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "baseUrl",
+			"value": "https://api-blacklist.qacoders.dev.br/api",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "password",
+			"value": "12345@Test",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "mail",
+			"value": "postman1@test.com.br",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "fullName",
+			"value": "",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "cpf",
+			"value": "22345678889",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "confirmPassword",
+			"value": "123456@Test",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "accessProfile",
+			"value": "ADMIN",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "userId",
+			"value": "68fc10dceb1149d308d73209",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "status",
+			"value": "true",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "corporateName",
+			"value": "web5 by Carlos",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "registerCompany",
+			"value": "12126456000444",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "matriz",
+			"value": "Irlanda",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "responsibleContact",
+			"value": "Carlos Ambrosio",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "telephone",
+			"value": "12399999999999",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "serviceDescription",
+			"value": "Development/QA",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "zipCode",
+			"value": "12321342",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "city",
+			"value": "Dublin",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "state",
+			"value": "IE",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "district",
+			"value": "Dublin",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "street",
+			"value": "Oconnell street",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "number",
+			"value": "2345214625",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "complement",
+			"value": "Second floor",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "country",
+			"value": "Irlanda",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "companyId",
+			"value": "68ed70d101b4c8756f5c8719",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "zipcode",
+			"value": "54321424",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "newPassword",
+			"value": "123456@Test",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "newFullName",
+			"value": "Angelicaa",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "newCpf",
+			"value": "",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "newConfirmPass",
+			"value": "1234@Test",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "newMail",
+			"value": "angelica@test.com.br",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "companyMail",
+			"value": "web5@test.com.br",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "FirstName",
+			"value": "Alice",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "LastName",
+			"value": "Lima",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "FullName",
+			"value": "Alice Lima",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "Mail",
+			"value": "alicelima@qacoders.com.br",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "passUser",
+			"value": "PZq54$A142",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "CPF",
+			"value": "66615480736",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "userMail",
+			"value": "camelo@test.com.br",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "userPassword",
+			"value": "12345@Test",
+			"type": "default",
+			"enabled": true
+		}
+	],
+	"name": "Globals",
+	"_postman_variable_scope": "globals",
+	"_postman_exported_at": "2025-10-25T00:01:45.208Z",
+	"_postman_exported_using": "Postman/11.68.5"
+}

@@ -1,0 +1,355 @@
+{
+	"info": {
+		"_postman_id": "4e838133-c6ed-4ce3-b610-8f05501eeedf",
+		"name": "Blacklist Copy",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "38881767",
+		"_collection_link": "https://blacklist-team.postman.co/workspace/Blacklist~ae9d61f6-e83c-402a-9f60-8949d0d0b321/collection/38881767-4e838133-c6ed-4ce3-b610-8f05501eeedf?action=share&source=collection_link&creator=38881767"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "user_login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let responseJson = pm.response.json();\r",
+									"\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"if (responseJson.user && responseJson.user._id && responseJson.token) {\r",
+									"    pm.globals.set(\"tokenAdmin\", responseJson.token);\r",
+									"    pm.globals.set(\"userId\", responseJson.user._id);\r",
+									"    console.log(\"Token and userId saved:\", responseJson.user._id);\r",
+									"} else {\r",
+									"    console.warn(\"Missing user or token in response:\", responseJson);\r",
+									"}\r",
+									"\r",
+									"\r",
+									"pm.test(\"Welcome Message\", function () {\r",
+									"    pm.environment.set(\"responseMessage\", responseJson.msg);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"if (responseJson.user && responseJson.user._id) {\r",
+									"    pm.test(\"Verify ID\", function () {\r",
+									"        pm.expect(responseJson.user._id).to.eql(pm.globals.get(\"userId\"));\r",
+									"    });\r",
+									"}\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"mail\": \"{{userMail}}\",\r\n  \"password\": \"{{userPassword}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/login",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "validate_user_token",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/validateToken",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"validateToken"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "update_user_password",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"// function generatePassword() {\r",
+									"//     const upperCase = \"ABCDEFGHIJKLMNOPQRSTUVWXZ\";\r",
+									"//     const lowerCase = \"abcdefghijklmnopqrstuvwxz\";\r",
+									"//     const numbers = \"0123456789\";\r",
+									"//     const specials = \"@#$%\";    \r",
+									"//     const allChars = upperCase + lowerCase + numbers + specials;\r",
+									" \r",
+									"//     const minLen = 8;\r",
+									"//     const maxLen = 12;\r",
+									"//     const passwordLength = Math.floor(Math.random() * (maxLen - minLen + 1)) + minLen;\r",
+									" \r",
+									"//     let senhaArray = [];\r",
+									" \r",
+									"// senhaArray.push(upperCase[Math.floor(Math.random() * upperCase.length)]);\r",
+									"// senhaArray.push(lowerCase[Math.floor(Math.random() * lowerCase.length)]);\r",
+									"// senhaArray.push(numbers[Math.floor(Math.random() * numbers.length)]);    \r",
+									"// senhaArray.push(specials[Math.floor(Math.random() * specials.length)]);\r",
+									" \r",
+									"//     for (let i = senhaArray.length; i < passwordLength; i++) {\r",
+									"//         senhaArray.push(allChars[Math.floor(Math.random() * allChars.length)]);\r",
+									"//     }\r",
+									"//     return shuffleString(senhaArray.join(\"\"));\r",
+									"// }\r",
+									" \r",
+									"// function shuffleString(string) {\r",
+									"//   return string.split(\"\").sort(() => Math.random() - 0.5).join(\"\");\r",
+									"// }\r",
+									" \r",
+									"// pm.globals.set(\"newPassword\", generatePassword());\r",
+									"\r",
+									"// pm.globals.set(\"confirmPassword\", pm.globals.get(\"newPassword\")); // <-- \r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const responseJson = pm.response.json();",
+									"const password = pm.globals.get(\"newPassword\");",
+									"const conPassword = pm.globals.get(\"confirmPassword\");",
+									"",
+									"",
+									"",
+									"const errorMessage = [",
+									"    \"Campo senha é obrigatório\",",
+									"    \"A senha deve ter entre 8 e 12 caracteres\",",
+									"    \"As senhas não conferem.\"",
+									"];",
+									"",
+									"const errorMessageConfPassword = [",
+									"    \"O campo de confirmação de senha não pode ficar vazio.\"",
+									"];",
+									"",
+									"const errorMessageSenhaObrigatoria = [",
+									"    \"Campo senha é obrigatório\",",
+									"    \"A senha deve ter entre 8 e 12 caracteres\",",
+									"    \"O campo de confirmação de senha não pode ficar vazio.\"",
+									"];",
+									"",
+									"if (pm.response.code === 200) {",
+									"    pm.test(\"Status test\", function () {",
+									"        pm.response.to.have.status(200);",
+									"    });",
+									"",
+									"    pm.test(\"Message after password has been updated successfully\", function () {",
+									"        pm.expect(responseJson.msg).to.eql(\"Senha atualizada com sucesso!\");",
+									"    });",
+									"",
+									"    pm.test(\"Checking if newPassword and confirmPassword match\", function () {",
+									"        pm.expect(password).to.eql(conPassword);",
+									"    });",
+									"}",
+									"",
+									"else if (pm.response.code === 400) {",
+									"",
+									"    ",
+									"    if (password === \"\" && conPassword === \"\") {",
+									"        pm.test(\"password field and confirm password are empty\", function () {",
+									"            pm.expect(responseJson.error).to.include.members([",
+									"                \"Campo senha é obrigatório\",",
+									"                \"A senha deve ter entre 8 e 12 caracteres\",",
+									"                \"O campo de confirmação de senha não pode ficar vazio.\"",
+									"            ]);",
+									"        });",
+									"    }",
+									"",
+									"    ",
+									"    else if (Array.isArray(responseJson.error) && errorMessage.every(msg => responseJson.error.includes(msg))) {",
+									"    pm.test(\"newPassword field should be empty\", function () {",
+									"        pm.expect(responseJson.error).to.include.members(errorMessage);",
+									"    });",
+									"}",
+									"",
+									"else if (Array.isArray(responseJson.error) && errorMessageConfPassword.every(msg => responseJson.error.includes(msg))) {",
+									"    pm.test(\"confirmPassword field should be empty\", function () {",
+									"        pm.expect(responseJson.error).to.include.members([",
+									"            \"O campo de confirmação de senha não pode ficar vazio.\",",
+									"            \"As senhas não conferem.\"",
+									"        ]);",
+									"    });",
+									"}",
+									"",
+									"",
+									"    else if (password !== conPassword) {",
+									"        pm.test(\"The passwords do not match\", function () {",
+									"            pm.expect(responseJson.error).to.include(\"As senhas não conferem.\");",
+									"        });",
+									"    }",
+									"",
+									"    else if (password && password.length < 8) {",
+									"        pm.test(\"Password field should be at least 8 characters\", function () {",
+									"            pm.expect(password.length).to.be.at.least(8);",
+									"        });",
+									"    }",
+									"",
+									"    else if (password && password.length > 12) {",
+									"        pm.test(\"Password field should be no more than 12 characters\", function () {",
+									"            pm.expect(password.length).to.be.at.most(12);",
+									"        });",
+									"    }",
+									"",
+									"    else if (typeof pm.globals.get(\"userId\") === \"string\") {",
+									"    pm.test(\"Check if id does not exists in the database\", function () {",
+									"        pm.expect(responseJson.msg).to.include(\"Esse usuário não existe em nossa base de dados.\");",
+									"    });",
+									"}",
+									"",
+									"    else {",
+									"        pm.test(\"Verify password requirements (special char, uppercase, lowercase, number)\", function () {",
+									"            pm.expect(responseJson.error).to.include(\"Senha precisa ter: uma letra maiúscula, uma letra minúscula, um número, um caractere especial(@#$%) e tamanho entre 8-12.\");",
+									"        });",
+									"    }",
+									"}",
+									"",
+									"",
+									"",
+									"pm.globals.set(\"userPassword\", pm.globals.get(\"newPassword\"))",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"password\": \"{{newPassword}}\",\r\n  \"confirmPassword\": \"{{confirmPassword}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/user/password/{{userId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"user",
+								"password",
+								"{{userId}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "apikey",
+		"apikey": [
+			{
+				"key": "key",
+				"value": "Authorization",
+				"type": "string"
+			},
+			{
+				"key": "value",
+				"value": "{{tokenAdmin}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}

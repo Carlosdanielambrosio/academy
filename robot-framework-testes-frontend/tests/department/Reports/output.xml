@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.3.2 (Python 3.12.4 on win32)" generated="2025-12-08T20:53:37.788009" rpa="false" schemaversion="5">
+<suite id="s1" name="Department" source="C:\Users\danie\OneDrive\Área de Trabalho\academy\blacklist_academy\robot-framework-testes-frontend\tests\department\department.robot">
+<kw name="Abrir Navegador" owner="common" type="SETUP">
+<kw name="Open Browser" owner="SeleniumLibrary">
+<msg time="2025-12-08T20:53:39.289025" level="INFO">Opening browser 'Chrome' to base url 'https://blacklist.qacoders.dev.br'.</msg>
+<arg>${BASE_URL_UI}</arg>
+<arg>Chrome</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<status status="PASS" start="2025-12-08T20:53:39.288026" elapsed="6.090000"/>
+</kw>
+<kw name="Maximize Browser Window" owner="SeleniumLibrary">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" start="2025-12-08T20:53:45.380006" elapsed="0.109130"/>
+</kw>
+<status status="PASS" start="2025-12-08T20:53:39.286151" elapsed="6.202985"/>
+</kw>
+<test id="s1-t1" name="Cenario 01: Cadastrar departamento" line="10">
+<kw name="Realizar Login" owner="login">
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>id:email</arg>
+<arg>timeout=10s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2025-12-08T20:53:45.494660" elapsed="0.688730"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2025-12-08T20:53:46.184405" level="INFO">Typing text 'blacklist@qa.com' into text field 'id:email'.</msg>
+<arg>id:email</arg>
+<arg>${FRONTEND_EMAIL}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2025-12-08T20:53:46.184405" elapsed="0.368268"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>id:password</arg>
+<arg>timeout=10s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2025-12-08T20:53:46.553677" elapsed="0.044414"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2025-12-08T20:53:46.599097" level="INFO">Typing text '1234@Test' into text field 'id:password'.</msg>
+<arg>id:password</arg>
+<arg>${FRONTEND_PASSWORD}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2025-12-08T20:53:46.598091" elapsed="0.279113"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>id:login</arg>
+<arg>timeout=10s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2025-12-08T20:53:46.878204" elapsed="0.058128"/>
+</kw>
+<kw name="Click Button" owner="SeleniumLibrary">
+<msg time="2025-12-08T20:53:46.937334" level="INFO">Clicking button 'id:login'.</msg>
+<arg>id:login</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="PASS" start="2025-12-08T20:53:46.937334" elapsed="0.310937"/>
+</kw>
+<status status="PASS" start="2025-12-08T20:53:45.491619" elapsed="1.757652"/>
+</kw>
+<kw name="Verificar Redirecionamento Para Home" owner="login">
+<kw name="Wait Until Location Is" owner="SeleniumLibrary">
+<msg time="2025-12-08T20:53:57.401461" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-1.png"&gt;&lt;img src="selenium-screenshot-1.png" width="800px"&gt;&lt;/a&gt;</msg>
+<msg time="2025-12-08T20:53:57.401461" level="FAIL">Location did not become 'https://blacklist.qacoders.dev.br/home' in 10 seconds.</msg>
+<arg>${BASE_URL_UI}/home</arg>
+<arg>timeout=10s</arg>
+<doc>Waits until the current URL is ``expected``.</doc>
+<status status="FAIL" start="2025-12-08T20:53:47.251273" elapsed="10.160185">Location did not become 'https://blacklist.qacoders.dev.br/home' in 10 seconds.</status>
+</kw>
+<kw name="Location Should Be" owner="SeleniumLibrary">
+<arg>${BASE_URL_UI}/home</arg>
+<doc>Verifies that the current URL is exactly ``url``.</doc>
+<status status="NOT RUN" start="2025-12-08T20:53:57.411458" elapsed="0.000000"/>
+</kw>
+<status status="FAIL" start="2025-12-08T20:53:47.250273" elapsed="10.161185">Location did not become 'https://blacklist.qacoders.dev.br/home' in 10 seconds.</status>
+</kw>
+<kw name="Verificar Elemento Cadastros Visivel" owner="login">
+<status status="NOT RUN" start="2025-12-08T20:53:57.413951" elapsed="0.001001"/>
+</kw>
+<kw name="Acessar Pagina Departamentos" owner="department">
+<status status="NOT RUN" start="2025-12-08T20:53:57.414952" elapsed="0.000000"/>
+</kw>
+<kw name="Cadastrar novo departamento" owner="department">
+<status status="NOT RUN" start="2025-12-08T20:53:57.415953" elapsed="0.000999"/>
+</kw>
+<status status="FAIL" start="2025-12-08T20:53:45.489136" elapsed="11.928815">Location did not become 'https://blacklist.qacoders.dev.br/home' in 10 seconds.</status>
+</test>
+<kw name="Fechar Navegador" owner="common" type="TEARDOWN">
+<kw name="Close Browser" owner="SeleniumLibrary">
+<doc>Closes the current browser.</doc>
+<status status="PASS" start="2025-12-08T20:53:57.427226" elapsed="2.448284"/>
+</kw>
+<status status="PASS" start="2025-12-08T20:53:57.426225" elapsed="2.449285"/>
+</kw>
+<status status="FAIL" start="2025-12-08T20:53:37.791248" elapsed="22.084262"/>
+</suite>
+<statistics>
+<total>
+<stat pass="0" fail="1" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat name="Department" id="s1" pass="0" fail="1" skip="0">Department</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
