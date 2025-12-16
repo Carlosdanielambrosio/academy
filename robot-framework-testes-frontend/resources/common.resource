@@ -5,7 +5,7 @@ Resource    ../config/dev.robot
 
 *** Keywords ***
 Abrir Navegador
-    ${headless}=    Get Enviroment Variable     CI  default=
+    ${headless}=    Get Environment Variable     CI  default=
     Run Keyword If      '${headless}' == 'true'      Abrir Navegador Headless     
     ...     ELSE    Abrir Navegador Interface
 
