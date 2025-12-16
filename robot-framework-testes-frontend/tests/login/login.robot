@@ -1,10 +1,9 @@
 *** Settings ***
-Resource    ../../resources/common.resource
 Resource    ../../resources/login.resource
-Resource    ../../config/dev.robot
+Resource    ../../resources/common.resource
 
-Suite Setup     Abrir Navegador
-Suite Teardown  Fechar Navegador
+Suite Setup       Abrir Navegador
+Suite Teardown    Fechar Navegador
 
 *** Test Cases ***
 Cenario 01: Realizar Login com Sucesso
