@@ -1,0 +1,57 @@
+name: Robot Framework Frontend
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  robot_framework_frontend:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install robotframework
+          pip install robotframework-seleniumlibrary
+          pip install robotframework-requests
+          pip install robotframework-faker
+          pip install webdriver-manager
+
+      - name: Setup Chrome and ChromeDriver
+        run: |
+          google-chrome --version
+          CHROME_VERSION=$(google-chrome --version | awk '{print $3}' | cut -d '.' -f 1)
+          wget -q https://storage.googleapis.com/chrome-for-testing-public/$(curl -s https://googlechromelabs.github.io/chrome-for-testing/last-known-good-versions.json | jq -r '.channels.Stable.version')/linux64/chromedriver-linux64.zip
+          unzip -q chromedriver-linux64.zip
+          sudo mv chromedriver-linux64/chromedriver /usr/local/bin/
+          sudo chmod +x /usr/local/bin/chromedriver
+          chromedriver --version
+
+      - name: Run robot_framework_frontend
+        env:
+          CI: true
+        run: |
+          cd robot-framework-testes-frontend
+          robot --outputdir results tests/login/
+
+      - name: Check Test results
+        run: |
+          cd robot-framework-testes-frontend/results
+          if grep -q "FAIL" output.xml; then
+            echo "❌ Testes falharam!"
+            exit 1
+          else
+            echo "✅ Todos os testes passaram!"
+          fi
