@@ -43,12 +43,12 @@ jobs:
         env:
           CI: true
         run: |
-          cd robot_framework_frontend
+          cd robot-framework-testes-frontend
           robot --outputdir results tests/login/
 
       - name: Check Test results
         run: |
-          cd robot_framework_frontend/results
+          cd robot-framework-testes-frontend/results
           if grep -q "FAIL" output.xml; then
             echo "❌ Testes falharam!"
             exit 1
